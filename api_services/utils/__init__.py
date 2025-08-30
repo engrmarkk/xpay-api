@@ -1,6 +1,5 @@
 import uuid
 import re
-from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 import string
 from random import choice
@@ -30,8 +29,8 @@ def validate_email(email):
 
 def get_serializer_errors(serializer):
     first_field, first_error = next(iter(serializer.errors.items()))
-    if first_field.lower() in ["email", "password", "first_name", "last_name", "address"]:
-        return f"{first_field.title()}{first_error[0]}".replace("This", "")
+    if first_field.lower() in ["password", "first_name", "last_name", "address"]:
+        return f"{first_field.title()}: {first_error[0]}".replace("This", "")
     return first_error[0]
 
 
