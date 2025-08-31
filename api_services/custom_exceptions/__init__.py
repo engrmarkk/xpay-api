@@ -13,7 +13,7 @@ class CustomException:
                 "message": "Resource Not Found",
                 "status": Res.FAILED,
             },
-            status=status.HTTP_404_NOT_FOUND
+            status=status.HTTP_404_NOT_FOUND,
         )
 
     def custom_500_view(request, exception=None):
@@ -23,5 +23,5 @@ class CustomException:
                 "message": "Network Error",
                 "status": Res.FAILED,
             },
-            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR,
         )
