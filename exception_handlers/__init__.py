@@ -9,9 +9,10 @@ def custom_exception_handler(exc, context):
 
     if response is not None:
         # Replace DRF's default format with my own
-        return return_response(Res.FAILED, 
-                               status=response.status_code, 
-                               message=response.data.get("detail", "Something went wrong")
-                               )
+        return return_response(
+            Res.FAILED,
+            status=response.status_code,
+            message=response.data.get("detail", "Something went wrong"),
+        )
 
     return response
