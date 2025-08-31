@@ -22,7 +22,7 @@ class LoginView(APIView):
                     Res.SUCCESS,
                     status.HTTP_200_OK,
                     "Login successful",
-                    **get_tokens_for_user(returned_data)
+                    **get_tokens_for_user(returned_data),
                 )
             else:
                 return return_response(
@@ -50,7 +50,7 @@ class RegisterView(APIView):
                     Res.SUCCESS,
                     status.HTTP_201_CREATED,
                     "User registered successfully",
-                    **get_tokens_for_user(user)
+                    **get_tokens_for_user(user),
                 )
             else:
                 return return_response(
