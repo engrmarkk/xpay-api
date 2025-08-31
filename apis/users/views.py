@@ -12,5 +12,9 @@ class UserOperation(APIView):
     permission_classes = [IsAuthenticated, IsActiveUser]
 
     def get(self, request):
-        return return_response(Res.SUCCESS, status.HTTP_200_OK, f"Hello, {request.user.email}!",
-                               data={"email": request.user.email, "id": request.user.id})
+        return return_response(
+            Res.SUCCESS,
+            status.HTTP_200_OK,
+            f"Hello, {request.user.email}!",
+            data={"email": request.user.email, "id": request.user.id},
+        )
