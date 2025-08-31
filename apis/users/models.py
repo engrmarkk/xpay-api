@@ -4,7 +4,6 @@ from django.contrib.auth.models import BaseUserManager
 from api_services.utils import hex_uuid
 
 
-
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         if not email:
