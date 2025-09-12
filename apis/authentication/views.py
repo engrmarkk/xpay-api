@@ -7,11 +7,16 @@ from rest_framework import status
 from api_services.utils import get_serializer_errors, get_tokens_for_user
 from api_services.logger import logger
 from django.db import transaction
+from drf_yasg.utils import swagger_auto_schema
 
 
 class LoginView(APIView):
     serializer_class = LoginSerializer
 
+    @swagger_auto_schema(
+        request_body=LoginSerializer,
+        responses={200: "JWT token"}
+    )
     def post(self, request):
         try:
             serializer = self.serializer_class(data=request.data)
@@ -40,7 +45,10 @@ class LoginView(APIView):
 
 class RegisterView(APIView):
     serializer_class = RegisterSerializer
-
+    @swagger_auto_schema(
+        request_body=RegisterSerializer,
+        responses={201: "User registered successfully"}
+    )
     def post(self, request):
         try:
             serializer = self.serializer_class(data=request.data)
