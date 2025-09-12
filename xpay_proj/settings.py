@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 from api_services.environmentals import SECRET_KEY
 from datetime import timedelta
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,18 +26,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]  # Change this in production
 
 
 # Application definition
 
-MY_APPS = [
-    "apis.ping",
-    "apis.users",
-    "apis.authentication"
-]
+MY_APPS = ["apis.ping", "apis.users", "apis.authentication"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -47,6 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "rest_framework_simplejwt",
+    "drf_yasg",
     *MY_APPS,
 ]
 
@@ -152,7 +150,27 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
-    "EXCEPTION_HANDLER": "exception_handlers.custom_exception_handler"
+    "EXCEPTION_HANDLER": "exception_handlers.custom_exception_handler",
+    # "DEFAULT_PERMISSION_CLASSES": [
+    #     "rest_framework.permissions.AllowAny",
+    # ]
+}
+
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'scheme': "bearer",
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    },
+    "USE_SESSION_AUTH": False,
+}
+
+REDOC_SETTINGS = {
+   'LAZY_RENDERING': False,
 }
 
 AUTH_USER_MODEL = "users.User"
